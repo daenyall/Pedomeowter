@@ -88,6 +88,7 @@
                 Source="Resources/Images/dotnet_bot.png"
                 Clicked="startToMeasure"
                 HorizontalOptions="Center"
+                VerticalOptions="EndAndExpand"
                 />
         </StackLayout>
     </ContentView>
