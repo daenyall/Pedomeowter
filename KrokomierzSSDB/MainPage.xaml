@@ -8,7 +8,7 @@
     <!-- Ogółem to kolory pasuje coś ten, ja mam 2 lewe ręce do tego no nie to jakbyś miał pomysł jakiś czy coś to powiedz to mogę zrobić no nie 
     obrazek na przycisku tez się zmieni potem na cos innego pod kolor no nie tylko to ustalic trzeba -->
 
-    <ScrollView>
+    <ContentView>
         <StackLayout >
             <Label 
                 HorizontalOptions="Center" 
@@ -90,6 +90,6 @@
                 HorizontalOptions="Center"
                 />
         </StackLayout>
-    </ScrollView>
+    </ContentView>
 
 </ContentPage>

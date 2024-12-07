@@ -4,12 +4,23 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:KrokomierzSSDB"
-    Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutBehavior="Flyout"
     Title="KrokomierzSSDB">
 
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+    
+    <FlyoutItem Title="Historia">
+        <Tab>
+            <ShellContent />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Wyzwania">
+        <Tab>
+            <ShellContent></ShellContent>
+        </Tab>
+    </FlyoutItem>
 
 </Shell>

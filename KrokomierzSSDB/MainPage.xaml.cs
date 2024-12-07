@@ -98,9 +98,9 @@ namespace KrokomierzSSDB
 
         }
 
-        double calculateDistance() {
-            return Location.CalculateDistance(oldLocation, location, DistanceUnits.Kilometers);
-        }
+      //  double calculateDistance() {
+          //  return Location.CalculateDistance(oldLocation, location, DistanceUnits.Kilometers);
+        //}
 
         double calculateSteps() {
             return Distance / stepLength;
@@ -121,7 +121,7 @@ namespace KrokomierzSSDB
             Dispatcher.Dispatch(new Action(() => {
                 timeLabel.Text = timePassed.ToString();
                 getCurrentLocation();
-                Distance = calculateDistance();
+                //Distance = calculateDistance();
                 distanceLabel.Text = Distance.ToString();
                 steps = calculateSteps();
                 stepsLabel.Text = steps.ToString();
