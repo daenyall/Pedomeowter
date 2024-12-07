@@ -138,8 +138,12 @@ namespace KrokomierzSSDB
             timer();
         }
     }
+<<<<<<< HEAD
 
     //TES
 
 
+=======
+    //TEST
+>>>>>>> 8c8cec0e8f9b721f9ba7c4929344b7211b0bd3ec
 }
