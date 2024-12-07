@@ -1,5 +1,4 @@
-﻿using CloudKit;
-
+﻿
 namespace KrokomierzSSDB
 {
     public partial class MainPage : ContentPage
@@ -139,5 +138,8 @@ namespace KrokomierzSSDB
             timer();
         }
     }
+
     //TES
+
+
 }
