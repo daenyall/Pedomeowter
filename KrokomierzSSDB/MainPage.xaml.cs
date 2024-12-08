@@ -13,16 +13,16 @@ namespace KrokomierzSSDB
         private int stepsCount = 0;
         private double distance = 0.0;
         private double caloriesBurned = 0.0;
-        private double speed = 0.0;
+        //private double speed = 0.0;
         private bool isTracking = false;
         private bool isPaused = false; // Dodana flaga do �ledzenia pauzy
-        private IDispatcherTimer locationUpdateTimer;
+        //private IDispatcherTimer locationUpdateTimer;
 
         private const double StepThreshold = 1.2;
         private const int StepCooldown = 300;
         private const double StepLength = 0.78;
         private const double CaloriesPerMeter = 0.05;
-        private bool _isWaiting = false;
+        //private bool _isWaiting = false;
 
         private DateTime _lastStepTime = DateTime.MinValue;
         private DateTime _startTime = DateTime.MinValue;
@@ -33,12 +33,12 @@ namespace KrokomierzSSDB
 
 
         int count = 0;
-        DateTime timeStarted;
+        //DateTime timeStarted;
         bool isTimerEnabled = false;
         bool _isCheckingLocation;
-        CancellationTokenSource _cancelTokenSource;
-        Location oldLocation;
-        Location location;
+        //CancellationTokenSource _cancelTokenSource;
+       // Location oldLocation;
+        //Location location;
         int height = 180;
         double stepLength;
         double Distance = 0;
@@ -121,7 +121,7 @@ namespace KrokomierzSSDB
 
         private void StartStepCounter()
         {
-            if (Accelerometer.IsSupported)
+            if (Accelerometer.IsSupported && !Accelerometer.IsMonitoring)
             {
                 Accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
                 Accelerometer.Start(SensorSpeed.UI);
