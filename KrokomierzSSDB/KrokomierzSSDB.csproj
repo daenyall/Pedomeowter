@@ -66,6 +66,9 @@
 	  <MauiXaml Update="Historia.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Mapa.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Statystyki.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

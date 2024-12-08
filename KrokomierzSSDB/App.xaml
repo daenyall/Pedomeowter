@@ -1,4 +1,4 @@
-﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:KrokomierzSSDB"
@@ -9,6 +9,42 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <!-- Styl dla Shell - globalne tło na czerwono -->
+            <Style TargetType="Shell">
+                <Setter Property="Shell.BackgroundColor" Value="Red" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="Gray" />
+                <Setter Property="Shell.UnselectedColor" Value="LightGray" />
+                <Setter Property="Shell.NavBarHasShadow" Value="True" />
+            </Style>
+
+            <!-- Styl dla Tab - tło na czerwono -->
+            <Style TargetType="Tab">
+                <Setter Property="Shell.BackgroundColor" Value="#270869" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="Gray" />
+                <Setter Property="Shell.UnselectedColor" Value="LightGray" />
+                <Setter Property="Shell.NavBarHasShadow" Value="False" />
+            </Style>
+
+            <!-- Styl dla ContentView - tło na czerwono -->
+            <Style TargetType="ContentView">
+                <Setter Property="BackgroundColor" Value="#191970" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <!-- Ustaw kolor czcionki na biały -->
+                <Setter Property="FontSize" Value="16" />
+                <!-- Opcjonalnie ustaw rozmiar czcionki -->
+            </Style>
+
+            <!-- Globalny styl dla Button -->
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
