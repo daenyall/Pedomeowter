@@ -1,6 +1,6 @@
 namespace KrokomierzSSDB;
 
-public partial class Mapa : ContentView
+public partial class Mapa : ContentPage
 {
 	public Mapa()
 	{

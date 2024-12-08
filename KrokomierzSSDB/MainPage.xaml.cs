@@ -16,11 +16,13 @@ namespace KrokomierzSSDB
         double steps;
         double avgSpeed;
 
-
-        public MainPage()
+        private readonly LocalDbService _dbService;
+        public MainPage(LocalDbService dbService)
         {
             stepLength = height * 0.36;
             InitializeComponent();
+            _dbService = dbService;
+            //Task.Run(async () => dbLabel.ItemsSource = await _dbService.GetHistorias()); //ogolnie to wszystko co z historia ma byc w pliku historia a nie mainpage, do zmiany 
         }
 
         private void startToMeasure(object sender, EventArgs e)

@@ -23,6 +23,8 @@ namespace KrokomierzSSDB
                     handlers.AddHandler(typeof(Shell), typeof(CustomShellRenderer)); // Rejestracja renderera
 #endif
                 });
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddSingleton<LocalDbService>();
 
 #if DEBUG
             builder.Logging.AddDebug();
