@@ -25,6 +25,7 @@ namespace KrokomierzSSDB
                 });
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddSingleton<LocalDbService>();
+            builder.Services.AddTransient<Historia>();
 
 #if DEBUG
             builder.Logging.AddDebug();

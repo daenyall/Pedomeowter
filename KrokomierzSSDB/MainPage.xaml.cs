@@ -26,19 +26,16 @@ namespace KrokomierzSSDB
         private DateTime _lastUpdateTime = DateTime.MinValue;
 
         private readonly LocalDbService _dbService;
-        private double stepLength;
-        private int height = 180; // Your height (cm)
 
         public MainPage(LocalDbService dbService)
         {
-            stepLength = height * 0.36; // Step length based on height
+            _dbService = dbService;
             InitializeComponent();
+
             timer = Dispatcher.CreateTimer();
             timer.Interval = TimeSpan.FromMilliseconds(100);
             timer.Tick += OnTimerTick;
-            _dbService = dbService;
 
-            // Request permissions when app starts
             RequestPermissionsAsync().ConfigureAwait(false);
         }
 
@@ -47,7 +44,7 @@ namespace KrokomierzSSDB
             var status = await Permissions.RequestAsync<Permissions.Sensors>();
             if (status != PermissionStatus.Granted)
             {
-                DisplayAlert("Permission Denied", "You need to grant permission to use the accelerometer.", "OK");
+                await DisplayAlert("Permission Denied", "You need to grant permission to use the accelerometer.", "OK");
             }
             else
             {
@@ -68,7 +65,7 @@ namespace KrokomierzSSDB
             }
         }
 
-        private void Accelerometer_ReadingChanged(object sender, AccelerometerChangedEventArgs e)
+        private async void Accelerometer_ReadingChanged(object sender, AccelerometerChangedEventArgs e)
         {
             if (isTracking && !isPaused)
             {
@@ -88,6 +85,9 @@ namespace KrokomierzSSDB
 
                         UpdateDistance();
                         UpdateCalories();
+
+                        // Zapisujemy kroki do bazy danych
+                        await _dbService.AddOrUpdateDailySteps(1, DateTime.Now);
                     }
                 }
             }
@@ -158,7 +158,6 @@ namespace KrokomierzSSDB
             }
         }
 
-        // Event handler for the start/stop button
         private void startToMeasure(object sender, EventArgs e)
         {
             StartStopwatch();

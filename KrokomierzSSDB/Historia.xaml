@@ -3,10 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KrokomierzSSDB.Historia"
              Title="Historia">
-    <ContentView>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </ContentView>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Historia kroków"
+                   FontSize="Large"
+                   HorizontalOptions="Center" />
+            <ListView x:Name="HistoriaListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding data}"
+                                  Detail="{Binding kroki}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
