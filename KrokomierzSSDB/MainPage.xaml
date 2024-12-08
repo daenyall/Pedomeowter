@@ -18,7 +18,7 @@
                 />
             <Label 
                 HorizontalOptions="Center" 
-                Text="0.0" 
+                Text="0.00 km" 
                 x:Name="distanceLabel"
                 FontSize="35"
                 Margin="0,0,0,20"
@@ -52,7 +52,7 @@
                         />
                     <Label 
                         HorizontalOptions="Center" 
-                        Text="0.0" 
+                        Text="0.00 kcal" 
                         x:Name="caloriesLabel"
                         FontSize="18"
                         />
