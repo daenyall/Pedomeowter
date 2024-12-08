@@ -4,39 +4,39 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:KrokomierzSSDB"
-   FlyoutBehavior="Flyout"
     Title="KrokomierzSSDB">
-    <FlyoutItem Title="Strona główna">
-
-        <ShellContent Title="Strona główna" Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}"></ShellContent>
-
-    </FlyoutItem>
-    <FlyoutItem Title="Wyzwania">
-
-        <ShellContent Title="Wyzwania" Route="Wyzwania" ContentTemplate="{DataTemplate local:Wyzwania}"></ShellContent>
-
-    </FlyoutItem>
-    <FlyoutItem Title="Historia">
-        <ShellContent Title="Historia" Route="Historia" ContentTemplate="{DataTemplate local:Historia}"></ShellContent>
-    </FlyoutItem>
+  
     <TabBar>
         <Tab Title="Strona główna">
             <ShellContent
-            Title="Strona główna"
-            ContentTemplate="{DataTemplate local:MainPage}"
-            Route="MainPage" />
+           Title="Strona główna"
+           ContentTemplate="{DataTemplate local:MainPage}"
+           Route="MainPage" />
         </Tab>
 
         <Tab Title="Statystyki">
             <ShellContent
-            ContentTemplate="{DataTemplate local:Statystyki}"
-            Route="Statystyki" />
-        </Tab>
+                Title="Statystyki"
+               
+           ContentTemplate="{DataTemplate local:Statystyki}"
+           Route="Statystyki" />
+        
+            <ShellContent
+                Title="Historia"
+                ContentTemplate="{DataTemplate local:Historia}"
+                Route="Historia"/>
 
+        </Tab>
+        <Tab Title="Wyzwania">
+            <ShellContent
+        Title="Wyzwania"
+        ContentTemplate="{DataTemplate local:Wyzwania}"
+        Route="Wyzwania"/>
+        </Tab>
         <Tab Title="Ustawienia">
             <ShellContent
-            ContentTemplate="{DataTemplate local:Ustawienia}"
-            Route="Ustawienia" />
+           ContentTemplate="{DataTemplate local:Ustawienia}"
+           Route="Ustawienia" />
         </Tab>
     </TabBar>
 </Shell>
