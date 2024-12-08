@@ -1,123 +1,59 @@
-﻿
-using Microsoft.Maui;
-using static Microsoft.Maui.ApplicationModel.Permissions;
+﻿using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls;
+using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace KrokomierzSSDB
 {
     public partial class MainPage : ContentPage
     {
-
         private Stopwatch stopwatch = new Stopwatch();
-        private IDispatcherTimer timert;
+        private IDispatcherTimer timer;
         private int stepsCount = 0;
         private double distance = 0.0;
         private double caloriesBurned = 0.0;
-        //private double speed = 0.0;
         private bool isTracking = false;
-        private bool isPaused = false; // Dodana flaga do �ledzenia pauzy
-        //private IDispatcherTimer locationUpdateTimer;
-
+        private bool isPaused = false;
         private const double StepThreshold = 1.2;
-        private const int StepCooldown = 300;
-        private const double StepLength = 0.78;
-        private const double CaloriesPerMeter = 0.05;
-        //private bool _isWaiting = false;
+        private const int StepCooldown = 300; // 300 ms cooldown between steps
+        private const double StepLength = 0.78; // Length of each step in meters
+        private const double CaloriesPerMeter = 0.05; // Calories per meter
 
         private DateTime _lastStepTime = DateTime.MinValue;
         private DateTime _startTime = DateTime.MinValue;
         private DateTime _lastUpdateTime = DateTime.MinValue;
 
-
-        //Moje zmienne ogolem nie oszusta
-
-
-        int count = 0;
-        //DateTime timeStarted;
-        bool isTimerEnabled = false;
-        bool _isCheckingLocation;
-        //CancellationTokenSource _cancelTokenSource;
-       // Location oldLocation;
-        //Location location;
-        int height = 180;
-        double stepLength;
-        double Distance = 0;
-        double steps;
-        double avgSpeed;
-
-
-
-
-
-
         private readonly LocalDbService _dbService;
+        private double stepLength;
+        private int height = 180; // Your height (cm)
 
         public MainPage(LocalDbService dbService)
         {
-            stepLength = height * 0.36;
+            stepLength = height * 0.36; // Step length based on height
             InitializeComponent();
-            // Inicjalizacja timera
-            timert = Dispatcher.CreateTimer();
-            timert.Interval = TimeSpan.FromMilliseconds(100);
-            timert.Tick += OnTimerTick;
-
-            RequestPermissions();
-
+            timer = Dispatcher.CreateTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(100);
+            timer.Tick += OnTimerTick;
             _dbService = dbService;
+
+            // Request permissions when app starts
+            RequestPermissionsAsync().ConfigureAwait(false);
         }
 
-        private void startToMeasure(object sender, EventArgs e)
+        private async Task RequestPermissionsAsync()
         {
-
-
-            if (stopwatch.IsRunning && !isPaused)
+            var status = await Permissions.RequestAsync<Permissions.Sensors>();
+            if (status != PermissionStatus.Granted)
             {
-                // Zatrzymanie stopera i zmiana statusu na pauzowany
-                stopwatch.Stop();
-                timert.Stop();
-                isPaused = true;
-                
-            }
-            else if (isPaused)
-            {
-                // Wznawianie liczenia po pauzie
-                stopwatch.Start();
-                timert.Start();
-                isPaused = false;
-                
+                DisplayAlert("Permission Denied", "You need to grant permission to use the accelerometer.", "OK");
             }
             else
             {
-                // Rozpocz�cie nowego treningu
-                stopwatch.Restart();
-                timert.Start();
-                
-                isTracking = true;
-
-                _startTime = DateTime.Now;
-                
-
-                
-                
-            }
-
-        }
-
-        private void OnTimerTick(object sender, EventArgs e)
-        {
-            if (!isPaused)
-            {
-                timeLabel.Text = stopwatch.Elapsed.ToString(@"hh\:mm\:ss");
-                UpdateDistance();
-                UpdateCalories();
-                UpdateAveragePace();
+                StartStepCounter();
             }
         }
-
-
-
-
-        
 
         private void StartStepCounter()
         {
@@ -128,7 +64,7 @@ namespace KrokomierzSSDB
             }
             else
             {
-                DisplayAlert("Brak wsparcia", "Tw�j telefon nie wspiera akcelerometru", "OK");
+                DisplayAlert("Brak wsparcia", "Twój telefon nie wspiera akcelerometru", "OK");
             }
         }
 
@@ -151,6 +87,7 @@ namespace KrokomierzSSDB
                         _lastStepTime = DateTime.Now;
 
                         UpdateDistance();
+                        UpdateCalories();
                     }
                 }
             }
@@ -176,27 +113,55 @@ namespace KrokomierzSSDB
                 {
                     _lastUpdateTime = DateTime.Now;
                     TimeSpan elapsedTime = DateTime.Now - _startTime;
-                    double paceInMinutesPerKm = (elapsedTime.TotalMinutes / (distance / 1000));
 
-                    int minutes = (int)paceInMinutesPerKm;
-                    int seconds = (int)((paceInMinutesPerKm - minutes) * 60);
+                    // Obliczamy prędkość w km/h (dystans w km / czas w godzinach)
+                    double speedInKmh = (distance / 1000) / elapsedTime.TotalHours;
 
-                    averageSpeedLabel.Text = $"{minutes:D2}:{seconds:D2}";
+                    // Zaokrąglamy do jednej liczby po przecinku
+                    averageSpeedLabel.Text = $"{speedInKmh:F1} km/h";
                 }
             }
         }
 
-
-        private void RequestPermissions()
+        private void OnTimerTick(object sender, EventArgs e)
         {
-            if (DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS)
+            if (!isPaused)
             {
-                Permissions.RequestAsync<Permissions.Sensors>();
-                StartStepCounter();
+                timeLabel.Text = stopwatch.Elapsed.ToString(@"hh\:mm\:ss");
+                UpdateAveragePace();
             }
         }
 
+        private void StartStopwatch()
+        {
+            if (stopwatch.IsRunning && !isPaused)
+            {
+                stopwatch.Stop();
+                timer.Stop();
+                Accelerometer.Stop(); // Stop accelerometer when paused
+                isPaused = true;
+            }
+            else if (isPaused)
+            {
+                stopwatch.Start();
+                timer.Start();
+                Accelerometer.Start(SensorSpeed.UI); // Start accelerometer when resumed
+                isPaused = false;
+            }
+            else
+            {
+                stopwatch.Restart();
+                timer.Start();
+                StartStepCounter();
+                isTracking = true;
+                _startTime = DateTime.Now;
+            }
+        }
 
-           
+        // Event handler for the start/stop button
+        private void startToMeasure(object sender, EventArgs e)
+        {
+            StartStopwatch();
+        }
     }
 }
