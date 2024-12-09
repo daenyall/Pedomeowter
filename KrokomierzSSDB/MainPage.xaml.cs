@@ -4,7 +4,7 @@ using Microsoft.Maui.Controls;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
+using Syncfusion.Maui.Charts;
 namespace KrokomierzSSDB
 {
     public partial class MainPage : ContentPage

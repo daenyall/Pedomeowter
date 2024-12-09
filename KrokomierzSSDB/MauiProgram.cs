@@ -1,37 +1,34 @@
 ﻿using Microsoft.Extensions.Logging;
-#if ANDROID
-using KrokomierzSSDB.Platforms.Android; // Dodano prawidłowy import dla CustomShellRenderer
-#endif
+using Syncfusion.Maui.Core.Hosting;
 
-namespace KrokomierzSSDB
+namespace KrokomierzSSDB;
+
+public static class MauiProgram
 {
-    public static class MauiProgram
+    public static MauiApp CreateMauiApp()
     {
-        public static MauiApp CreateMauiApp()
-        {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                })
-                .ConfigureMauiHandlers(handlers =>
-                {
-#if ANDROID
-                    handlers.AddHandler(typeof(Shell), typeof(CustomShellRenderer)); // Rejestracja renderera
-#endif
-                });
-            builder.Services.AddTransient<MainPage>();
-            builder.Services.AddSingleton<LocalDbService>();
-            builder.Services.AddTransient<Historia>();
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            })
+            .ConfigureSyncfusionCore();
+
+        // Rejestracja usług
+        builder.Services.AddSingleton<LocalDbService>();
+
+        // Rejestracja stron
+        builder.Services.AddTransient<MainPage>();
+        builder.Services.AddTransient<Historia>(); // Poprawna rejestracja strony Historia
+        builder.Services.AddTransient<Statystyki>();
 
 #if DEBUG
-            builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
-        }
+        return builder.Build();
     }
 }
