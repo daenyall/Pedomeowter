@@ -4,9 +4,12 @@
              x:Class="KrokomierzSSDB.Ustawienia"
              Title="Ustawienia">
     <ContentView>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <StackLayout>
+            <Entry Placeholder="Enter something" x:Name="stepsEntry"/>
+            <Button Text="Update challenge steps" Clicked="UpdateChallengeSteps"/>
+        </StackLayout>
+        
+
+
     </ContentView>
 </ContentPage>

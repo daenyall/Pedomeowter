@@ -1,10 +1,29 @@
-namespace KrokomierzSSDB;
+using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using Syncfusion.Maui.Charts;
 
-public partial class Ustawienia : ContentPage
+
+
+namespace KrokomierzSSDB
 {
-	public Ustawienia()
-	{
-		InitializeComponent();
-		int celkroki = 5000;
-	}
+
+    public partial class Ustawienia : ContentPage
+    {
+        private readonly LocalDbService _dbService;
+        public Ustawienia(LocalDbService dbService)
+        {
+            _dbService = dbService;
+            InitializeComponent();
+        }
+
+        private void UpdateChallengeSteps(object sender, EventArgs e)
+        {
+            
+            _dbService.UpdateChallengeSteps(int.Parse(stepsEntry.Text));
+        }
+    }
 }

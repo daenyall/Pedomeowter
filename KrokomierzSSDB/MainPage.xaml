@@ -8,6 +8,8 @@
              >
     <ContentView>
         <StackLayout Padding="20">
+            <Label  x:Name="challengeProgressLabel" Text="500/1000"/>
+            <ProgressBar x:Name="challengeProgressBar" Progress="0.5" />
             <Label 
                 HorizontalOptions="Center" 
                 Text="Dystans"

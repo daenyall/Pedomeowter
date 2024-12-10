@@ -20,6 +20,7 @@ namespace KrokomierzSSDB
         private const int StepCooldown = 300; // 300 ms cooldown between steps
         private const double StepLength = 0.78; // Length of each step in meters
         private const double CaloriesPerMeter = 0.05; // Calories per meter
+        private int challengeSteps;  
 
         private DateTime _lastStepTime = DateTime.MinValue;
         private DateTime _startTime = DateTime.MinValue;
@@ -37,6 +38,14 @@ namespace KrokomierzSSDB
             timer.Tick += OnTimerTick;
 
             RequestPermissionsAsync().ConfigureAwait(false);
+
+            updateProgressBar();
+        }
+
+        private void updateProgressBar()
+        {
+            challengeSteps = _dbService.GetChallengeSteps();
+            challengeProgressLabel.Text = $"{stepsCount}/{challengeSteps}";
         }
 
         private async Task RequestPermissionsAsync()

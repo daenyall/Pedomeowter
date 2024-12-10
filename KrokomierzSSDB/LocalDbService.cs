@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace KrokomierzSSDB
 {
@@ -12,10 +13,12 @@ namespace KrokomierzSSDB
         private const string DB_NAME = "demo_local_db.db3";
         private readonly SQLiteAsyncConnection _connection;
 
+
         public LocalDbService()
         {
             _connection = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, DB_NAME));
             _connection.CreateTableAsync<HistoriaDB>(); // Tworzymy tabelę Historia
+            _connection.CreateTableAsync<DaneDB>();
         }
 
         public async Task<List<HistoriaDB>> GetHistorias()
@@ -72,6 +75,51 @@ namespace KrokomierzSSDB
         {
             return await _connection.Table<HistoriaDB>()
                 .FirstOrDefaultAsync(x => x.data >= date.Date && x.data < date.Date.AddDays(1));
+        }
+
+        public async Task UpdateChallengeSteps(int przekazaneKroki)
+        {
+            var doesExist = await _connection.Table<DaneDB>()
+                                             .FirstOrDefaultAsync();
+
+            if (doesExist != null)
+            {
+                // Jeśli istnieje, aktualizujemy dane
+                doesExist.celKroki = przekazaneKroki;
+                await Update(doesExist);
+            }
+            else
+            {
+                // Jeśli nie istnieje, tworzymy nowy wpis
+                var daneEntry = new DaneDB{ celKroki = przekazaneKroki };
+                await Create(daneEntry);
+            }
+        }
+
+        private async Task Create(DaneDB daneDB)
+        {
+            await _connection.InsertAsync(daneDB);
+        }
+
+        private async Task Update(DaneDB daneDB)
+        {
+            await _connection.UpdateAsync(daneDB);
+        }
+
+        public int GetChallengeSteps()
+        {
+            var doesExist = _connection.Table<DaneDB>()
+                                             .FirstOrDefaultAsync();
+            if (doesExist != null)
+            {
+                return doesExist.Result.celKroki;
+            }
+            else
+            {
+                return 0;
+            }
+                
+            
         }
     }
 }
