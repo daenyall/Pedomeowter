@@ -7,14 +7,16 @@
     Title="KrokomierzSSDB">
   
     <TabBar>
-        <Tab Title="Strona główna">
+        <Tab Icon="home.png">
             <ShellContent
            Title="Strona główna"
            ContentTemplate="{DataTemplate local:MainPage}"
-           Route="MainPage" />
+           Route="MainPage"
+                
+                />
         </Tab>
 
-        <Tab Title="Statystyki">
+        <Tab Icon="chart.png">
             <ShellContent
                 Title="Statystyki"
                
@@ -27,13 +29,13 @@
                 Route="Historia"/>
 
         </Tab>
-        <Tab Title="Wyzwania">
+        <Tab Icon="award.png">
             <ShellContent
         Title="Wyzwania"
         ContentTemplate="{DataTemplate local:Wyzwania}"
         Route="Wyzwania"/>
         </Tab>
-        <Tab Title="Ustawienia">
+        <Tab Icon="settings.png">
             <ShellContent
            ContentTemplate="{DataTemplate local:Ustawienia}"
            Route="Ustawienia" />
