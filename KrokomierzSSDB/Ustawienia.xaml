@@ -5,11 +5,8 @@
              Title="Ustawienia">
     <ContentView>
         <StackLayout>
-            <Entry Placeholder="Enter something" x:Name="stepsEntry"/>
+            <Entry Placeholder="Enter your daily step goal" x:Name="stepsEntry"/>
             <Button Text="Update challenge steps" Clicked="UpdateChallengeSteps"/>
         </StackLayout>
-        
-
-
     </ContentView>
 </ContentPage>

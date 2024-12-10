@@ -1,10 +1,10 @@
-﻿using Microsoft.Maui;
+﻿using Microsoft.Maui.Controls;
 using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Controls;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Syncfusion.Maui.Charts;
+using SQLite;
+
 namespace KrokomierzSSDB
 {
     public partial class MainPage : ContentPage
@@ -16,11 +16,11 @@ namespace KrokomierzSSDB
         private double caloriesBurned = 0.0;
         private bool isTracking = false;
         private bool isPaused = false;
-        private const double StepThreshold = 1.2;
-        private const int StepCooldown = 300; // 300 ms cooldown between steps
+        private const double StepThreshold = 2;
+        private const int StepCooldown = 500; // 300 ms cooldown between steps
         private const double StepLength = 0.78; // Length of each step in meters
         private const double CaloriesPerMeter = 0.05; // Calories per meter
-        private int challengeSteps;  
+        private int challengeSteps;
 
         private DateTime _lastStepTime = DateTime.MinValue;
         private DateTime _startTime = DateTime.MinValue;
@@ -39,13 +39,37 @@ namespace KrokomierzSSDB
 
             RequestPermissionsAsync().ConfigureAwait(false);
 
-            updateProgressBar();
+            // Get the initial challenge steps from DB
+            LoadChallengeSteps();
+
+            // Listen for changes in challenge steps
+            MessagingCenter.Subscribe<Ustawienia, int>(this, "UpdateChallengeSteps", (sender, newChallengeSteps) =>
+            {
+                challengeSteps = newChallengeSteps;
+                UpdateProgressBar();  // Update progress bar whenever challenge steps change
+            });
         }
 
-        private void updateProgressBar()
+        private async Task LoadChallengeSteps()
         {
-            challengeSteps = _dbService.GetChallengeSteps();
+            challengeSteps = await _dbService.GetChallengeSteps(); // Retrieve the goal from the database
+            UpdateProgressBar(); // Update the progress bar with the initial challenge steps value
+        }
+
+        private void UpdateProgressBar()
+        {
+            // Update progress bar display with stepsCount and challengeSteps
             challengeProgressLabel.Text = $"{stepsCount}/{challengeSteps}";
+            double progress = challengeSteps > 0 ? (double)stepsCount / challengeSteps : 0; // Avoid division by zero
+            challengeProgressBar.Progress = progress;
+        }
+
+        private void OnTimerTick(object sender, EventArgs e)
+        {
+            if (!isPaused)
+            {
+                timeLabel.Text = stopwatch.Elapsed.ToString(@"hh\:mm\:ss");
+            }
         }
 
         private async Task RequestPermissionsAsync()
@@ -97,6 +121,7 @@ namespace KrokomierzSSDB
 
                         // Zapisujemy kroki do bazy danych
                         await _dbService.AddOrUpdateDailySteps(1, DateTime.Now);
+                        UpdateProgressBar(); // Update the progress bar
                     }
                 }
             }
@@ -112,33 +137,6 @@ namespace KrokomierzSSDB
         {
             caloriesBurned = distance * CaloriesPerMeter;
             caloriesLabel.Text = $"{caloriesBurned:F2} kcal";
-        }
-
-        private void UpdateAveragePace()
-        {
-            if (distance > 0 && _startTime != DateTime.MinValue)
-            {
-                if ((DateTime.Now - _lastUpdateTime).TotalSeconds >= 3)
-                {
-                    _lastUpdateTime = DateTime.Now;
-                    TimeSpan elapsedTime = DateTime.Now - _startTime;
-
-                    // Obliczamy prędkość w km/h (dystans w km / czas w godzinach)
-                    double speedInKmh = (distance / 1000) / elapsedTime.TotalHours;
-
-                    // Zaokrąglamy do jednej liczby po przecinku
-                    averageSpeedLabel.Text = $"{speedInKmh:F1} km/h";
-                }
-            }
-        }
-
-        private void OnTimerTick(object sender, EventArgs e)
-        {
-            if (!isPaused)
-            {
-                timeLabel.Text = stopwatch.Elapsed.ToString(@"hh\:mm\:ss");
-                UpdateAveragePace();
-            }
         }
 
         private void StartStopwatch()

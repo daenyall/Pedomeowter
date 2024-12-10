@@ -1,29 +1,40 @@
-using Microsoft.Maui;
-using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
+using SQLite;
 using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Syncfusion.Maui.Charts;
-
-
 
 namespace KrokomierzSSDB
 {
-
     public partial class Ustawienia : ContentPage
     {
-        private readonly LocalDbService _dbService;
-        public Ustawienia(LocalDbService dbService)
+        private readonly SQLiteAsyncConnection _connection;
+
+        public Ustawienia(SQLiteAsyncConnection connection)
         {
-            _dbService = dbService;
+            _connection = connection;
             InitializeComponent();
         }
 
-        private void UpdateChallengeSteps(object sender, EventArgs e)
+        private async void UpdateChallengeSteps(object sender, EventArgs e)
         {
-            
-            _dbService.UpdateChallengeSteps(int.Parse(stepsEntry.Text));
+            int steps;
+            if (int.TryParse(stepsEntry.Text, out steps))
+            {
+                var existingRecord = await _connection.Table<DaneDB>().FirstOrDefaultAsync();
+
+                if (existingRecord != null)
+                {
+                    existingRecord.celKroki = steps;
+                    await _connection.UpdateAsync(existingRecord);
+                }
+                else
+                {
+                    var newRecord = new DaneDB { celKroki = steps };
+                    await _connection.InsertAsync(newRecord);
+                }
+
+                // Notify MainPage to update the progress bar
+                MessagingCenter.Send(this, "UpdateChallengeSteps", steps);
+            }
         }
     }
 }

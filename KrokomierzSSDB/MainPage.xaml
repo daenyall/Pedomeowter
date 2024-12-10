@@ -2,96 +2,42 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KrokomierzSSDB.MainPage"
-             Title="Krokomierz"
-        
-
-             >
+             Title="Krokomierz">
     <ContentView>
         <StackLayout Padding="20">
-            <Label  x:Name="challengeProgressLabel" Text="500/1000"/>
-            <ProgressBar x:Name="challengeProgressBar" Progress="0.5" />
-            <Label 
-                HorizontalOptions="Center" 
-                Text="Dystans"
-                FontSize="45"
-                FontAttributes="Bold"
-                />
-            <Label 
-                HorizontalOptions="Center" 
-                Text="0.00 km" 
-                x:Name="distanceLabel"
-                FontSize="35"
-                Margin="0,0,0,20"
-                />
-            <Label 
-                HorizontalOptions="Center" 
-                Text="Kroki"
-                FontSize="45"
-                FontAttributes="Bold"
-                />
-            <Label 
-                HorizontalOptions="Center" 
-                Text="0" 
-                x:Name="stepsLabel"
-                FontSize="35"
-                Margin="0,0,0,40"
-                />
+            <Label x:Name="challengeProgressLabel" Text="500/1000" FontSize="20" />
+            <ProgressBar x:Name="challengeProgressBar" Progress="0.5" HeightRequest="10" />
 
-            <Grid
-                Margin="0,0,0,60">
+            <Label HorizontalOptions="Center" Text="Dystans" FontSize="45" FontAttributes="Bold" />
+            <Label HorizontalOptions="Center" Text="0.00 km" x:Name="distanceLabel" FontSize="35" Margin="0,0,0,20" />
+
+            <Label HorizontalOptions="Center" Text="Kroki" FontSize="45" FontAttributes="Bold" />
+            <Label HorizontalOptions="Center" Text="0" x:Name="stepsLabel" FontSize="35" Margin="0,0,0,40" />
+
+            <Grid Margin="0,0,0,60">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackLayout>
-                    <Label 
-                        HorizontalOptions="Center" 
-                        Text="Kalorie"
-                        FontSize="23"
-                        FontAttributes="Bold"
-                        />
-                    <Label 
-                        HorizontalOptions="Center" 
-                        Text="0.00 kcal" 
-                        x:Name="caloriesLabel"
-                        FontSize="18"
-                        />
+                    <Label HorizontalOptions="Center" Text="Kalorie" FontSize="23" FontAttributes="Bold" />
+                    <Label HorizontalOptions="Center" Text="0.00 kcal" x:Name="caloriesLabel" FontSize="18" />
                 </StackLayout>
                 <StackLayout Grid.Column="1">
-                    <Label 
-                        HorizontalOptions="Center" 
-                        Text="Średnia prędkość"
-                        FontSize="23"
-                        FontAttributes="Bold"
-                        />
-                    <Label 
-                        HorizontalOptions="Center" 
-                        Text="0.0 km/h" 
-                        x:Name="averageSpeedLabel"
-                        FontSize="18"
-                        />
+                    <Label HorizontalOptions="Center" Text="Średnia prędkość" FontSize="23" FontAttributes="Bold" />
+                    <Label HorizontalOptions="Center" Text="0.0 km/h" x:Name="averageSpeedLabel" FontSize="18" />
                 </StackLayout>
             </Grid>
-            <Label 
-                HorizontalOptions="Center" 
-                Text="Czas"
-                FontSize="45"
-                FontAttributes="Bold"
-                />
-            <Label 
-                HorizontalOptions="Center" 
-                Text="00:00:00" 
-                x:Name="timeLabel"
-                FontSize="35"
-                />
-            <ImageButton 
-                Source="Resources/Images/dotnet_bot.png"
-                Clicked="startToMeasure"
-                HorizontalOptions="Center"
-                VerticalOptions="EndAndExpand"
-                HeightRequest="100"
-                WidthRequest="100"
-                />
+
+            <Label HorizontalOptions="Center" Text="Czas" FontSize="45" FontAttributes="Bold" />
+            <Label HorizontalOptions="Center" Text="00:00:00" x:Name="timeLabel" FontSize="35" />
+
+            <ImageButton Source="Resources/Images/dotnet_bot.png"
+                         Clicked="startToMeasure"
+                         HorizontalOptions="Center"
+                         VerticalOptions="EndAndExpand"
+                         HeightRequest="100"
+                         WidthRequest="100" />
         </StackLayout>
     </ContentView>
 </ContentPage>
