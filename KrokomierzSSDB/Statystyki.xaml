@@ -5,7 +5,7 @@
              xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
               xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              Title="Statystyki">
-    <VerticalStackLayout>
+    <VerticalStackLayout VerticalOptions="CenterAndExpand">
         <!-- Wykres -->
         <chart:SfCartesianChart>
             <chart:SfCartesianChart.XAxes>
@@ -21,7 +21,9 @@
                                     XBindingPath="Date"
                                     YBindingPath="Steps"
                                     Label="Steps"
-                                    Fill="RoyalBlue" />
+                                    Fill="RoyalBlue"
+                                    Width="0.1"
+                                    />
             </chart:SfCartesianChart.Series>
         </chart:SfCartesianChart>
     </VerticalStackLayout>
