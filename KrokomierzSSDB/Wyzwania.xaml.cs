@@ -23,7 +23,7 @@ namespace KrokomierzSSDB
             // Definicja wyzwañ
             _wyzwania = new List<Wyzwanie>
             {
-                new Wyzwanie { Nazwa = "PrzejdŸ 1000 kroków", Cel = 1000 },
+                new Wyzwanie { Nazwa = "PrzejdŸ 1000 kroków", Cel = 1000},
                 new Wyzwanie { Nazwa = "PrzejdŸ 5000 kroków", Cel = 5000 },
                 new Wyzwanie { Nazwa = "PrzejdŸ 10000 kroków", Cel = 10000 },
                 new Wyzwanie { Nazwa = "PrzejdŸ 50000 kroków", Cel = 50000 },
@@ -41,13 +41,8 @@ namespace KrokomierzSSDB
                 if (totalSteps >= wyzwanie.Cel)
                 {
                     wyzwanie.CzyUkonczone = true;
-                    
                 }
-                else
-                {
-                    
-
-                }
+              
 
                 // Wyœwietl wyzwania w ListView
                 ChallengesListView.ItemsSource = _wyzwania;
@@ -60,5 +55,5 @@ namespace KrokomierzSSDB
         public int Cel { get; set; }
         public bool CzyUkonczone { get; set; }
         public string Postep { get; set; }
-    }
+        }
 }}

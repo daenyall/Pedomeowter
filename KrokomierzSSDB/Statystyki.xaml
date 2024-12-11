@@ -4,8 +4,10 @@
              x:Class="KrokomierzSSDB.Statystyki"
              xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
               xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
-             Title="Statystyki">
-    <VerticalStackLayout VerticalOptions="CenterAndExpand">
+             Title="Statystyki"
+             BackgroundColor="#191970"
+             >
+    <VerticalStackLayout VerticalOptions="CenterAndExpand" BackgroundColor="#191970">
         <!-- Wykres -->
         <chart:SfCartesianChart>
             <chart:SfCartesianChart.XAxes>

@@ -3,22 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KrokomierzSSDB.Wyzwania"
              Title="Wyzwania">
-    <StackLayout Padding="20">
-        <Label 
-            Text="Twoje wyzwania"
-            FontSize="24"
-            HorizontalOptions="Center" />
+    <StackLayout Padding="20" BackgroundColor="#191970">
+       
         <ListView 
             x:Name="ChallengesListView"
             HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
+                    <ViewCell x:Name="WyzwaniaCell">
                         <StackLayout Padding="10">
                             <Label 
                                 Text="{Binding Nazwa}"
                                 FontSize="18"
-                                TextColor="Black" />
+                                TextColor="White" />
                             <Label 
                                 Text="{Binding Postep}"
                                 FontSize="14"

@@ -58,7 +58,8 @@ namespace KrokomierzSSDB
 
         private void UpdateProgressBar()
         {
-            // Update progress bar display with stepsCount and challengeSteps
+
+           
             challengeProgressLabel.Text = $"{stepsCount}/{challengeSteps}";
             double progress = challengeSteps > 0 ? (double)stepsCount / challengeSteps : 0; // Avoid division by zero
             challengeProgressBar.Progress = progress;

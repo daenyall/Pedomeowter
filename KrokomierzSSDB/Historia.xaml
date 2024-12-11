@@ -4,7 +4,7 @@
              x:Class="KrokomierzSSDB.Historia"
              Title="Historia">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="#191970">
             <Label Text="Historia kroków"
                    FontSize="Large"
                    HorizontalOptions="Center" />
@@ -12,7 +12,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding data}"
-                                  Detail="{Binding kroki}" />
+                                  Detail="{Binding kroki}"
+                                  TextColor="White"
+                                  />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
