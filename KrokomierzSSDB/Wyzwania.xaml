@@ -3,10 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KrokomierzSSDB.Wyzwania"
              Title="Wyzwania">
-    <ContentView>
+    <StackLayout Padding="20">
         <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
+            Text="Twoje wyzwania"
+            FontSize="24"
             HorizontalOptions="Center" />
-    </ContentView>
+        <ListView 
+            x:Name="ChallengesListView"
+            HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label 
+                                Text="{Binding Nazwa}"
+                                FontSize="18"
+                                TextColor="Black" />
+                            <Label 
+                                Text="{Binding Postep}"
+                                FontSize="14"
+                                TextColor="Gray" />
+                    
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

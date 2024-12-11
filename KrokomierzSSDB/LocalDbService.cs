@@ -65,11 +65,7 @@ namespace KrokomierzSSDB
             }
         }
 
-        public async Task<HistoriaDB> GetByDate(DateTime date)
-        {
-            return await _connection.Table<HistoriaDB>()
-                .FirstOrDefaultAsync(x => x.data >= date.Date && x.data < date.Date.AddDays(1));
-        }
+   
 
         public async Task UpdateChallengeSteps(int przekazaneKroki)
         {
@@ -102,5 +98,16 @@ namespace KrokomierzSSDB
             var existingRecord = await _connection.Table<DaneDB>().FirstOrDefaultAsync();
             return existingRecord?.celKroki ?? DefaultStepGoal;
         }
+        public async Task<int> GetTotalStepsAsync()
+        {
+            var allRecords = await _connection.Table<HistoriaDB>().ToListAsync();
+
+            // Sumowanie wartości 'kroki'
+            int totalSteps = allRecords.Sum(record => record.kroki);
+
+            return totalSteps;
+        }
+
+
     }
 }
