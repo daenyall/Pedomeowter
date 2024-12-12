@@ -20,7 +20,7 @@ namespace KrokomierzSSDB
 
         private async void InitializeChallenges()
         {
-            // Definicja wyzwañ
+            
             _wyzwania = new List<Wyzwanie>
             {
                 new Wyzwanie { Nazwa = "PrzejdŸ 1000 kroków", Cel = 1000},
@@ -30,10 +30,10 @@ namespace KrokomierzSSDB
                 new Wyzwanie { Nazwa = "PrzejdŸ 100000 kroków", Cel = 100000 }
             };
 
-            // Pobierz sumê kroków z tabeli Historia
+            
             int totalSteps = await _dbService.GetTotalStepsAsync();
 
-            // Aktualizuj status ka¿dego wyzwania
+           
             foreach (var wyzwanie in _wyzwania)
             {
                 wyzwanie.CzyUkonczone = totalSteps >= wyzwanie.Cel;
@@ -44,7 +44,7 @@ namespace KrokomierzSSDB
                 }
               
 
-                // Wyœwietl wyzwania w ListView
+                
                 ChallengesListView.ItemsSource = _wyzwania;
         }
     }

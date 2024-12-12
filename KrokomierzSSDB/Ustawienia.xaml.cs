@@ -32,7 +32,7 @@ namespace KrokomierzSSDB
                     await _connection.InsertAsync(newRecord);
                 }
 
-                // Notify MainPage to update the progress bar
+                
                 MessagingCenter.Send(this, "UpdateChallengeSteps", steps);
             }
         }

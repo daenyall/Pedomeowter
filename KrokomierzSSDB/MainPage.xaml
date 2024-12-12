@@ -5,20 +5,20 @@
              Title="Krokomierz"
              >
     <ContentView>
-        <StackLayout Padding="20">
+        <StackLayout>
             <Grid Padding="10" VerticalOptions="CenterAndExpand">
                 <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="0.01*" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.01*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition  Height="auto"></RowDefinition>
-                    <RowDefinition  Height="300"></RowDefinition>
+                    <RowDefinition  Height="200"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Frame Grid.ColumnSpan="3" BorderColor="Transparent" BackgroundColor="#391970F9" WidthRequest="390" Margin="0,0,0,40">
+                <Frame Grid.Column="1" BorderColor="Transparent" BackgroundColor="#391970F9" Margin="0,0,0,40">
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -39,13 +39,13 @@
 
 
 
-                <Frame  Grid.ColumnSpan="3" Grid.Row="1" BorderColor="Transparent" BackgroundColor="#391970F9" WidthRequest="390" Padding="0,10">
+                <Frame  Grid.Column="1" Grid.Row="1" BorderColor="Transparent" BackgroundColor="#391970F9" Padding="0,10">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="0.75*"/>
-                            <RowDefinition Height="0.35*"/>
+                            <RowDefinition Height="0.0"/>
+                            <RowDefinition Height="1.5*"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="0.35*"/>
+                            <RowDefinition Height="0.75*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
@@ -56,12 +56,12 @@
 
                         <!-- Calories -->
 
-                        <Label HorizontalOptions="Center" Text="Kalorie" FontSize="23" FontAttributes="Bold" Grid.Column="0" Grid.Row="1"/>
+                        <Label VerticalOptions="End" HorizontalOptions="Center" Text="Kalorie" FontSize="23" FontAttributes="Bold" Grid.Column="0" Grid.Row="1"/>
                         <Label HorizontalOptions="Center" Text="0.00 kcal" x:Name="caloriesLabel" FontSize="18" Grid.Column="0" Grid.Row="2"/>
 
                         <!-- Avg speed -->
 
-                        <Label HorizontalOptions="Center" Text="Średnia prędkość" FontSize="23" FontAttributes="Bold" Grid.Column="1" Grid.Row="1"/>
+                        <Label HorizontalOptions="Center" Text="Średnia prędkość" FontSize="23" FontAttributes="Bold" Grid.Column="1" Grid.Row="1" Margin="35,0,0,0"/>
                         <Label HorizontalOptions="Center" Text="0.0 km/h" x:Name="averageSpeedLabel" FontSize="18" Grid.Column="1" Grid.Row="2"/>
 
                         <!-- Distance -->
