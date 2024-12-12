@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
 using SQLite;
+using CommunityToolkit.Maui;
 
 namespace KrokomierzSSDB;
 
@@ -32,6 +33,8 @@ public static class MauiProgram
         builder.Services.AddTransient<Historia>();
         builder.Services.AddTransient<Ustawienia>();
         builder.Services.AddTransient<Statystyki>();
+        builder.UseMauiApp<App>().UseMauiCommunityToolkit();
+
 
 #if DEBUG
         builder.Logging.AddDebug();
