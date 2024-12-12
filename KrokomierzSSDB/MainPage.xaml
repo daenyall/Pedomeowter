@@ -6,13 +6,6 @@
              >
     <ContentView>
         <StackLayout Padding="20">
-           
-
-
-       
-         
-   
-           
             <Grid Padding="10" VerticalOptions="CenterAndExpand">
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition Width="*" />
@@ -61,17 +54,22 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
+                        <!-- Calories -->
+
                         <Label HorizontalOptions="Center" Text="Kalorie" FontSize="23" FontAttributes="Bold" Grid.Column="0" Grid.Row="1"/>
                         <Label HorizontalOptions="Center" Text="0.00 kcal" x:Name="caloriesLabel" FontSize="18" Grid.Column="0" Grid.Row="2"/>
 
+                        <!-- Avg speed -->
 
                         <Label HorizontalOptions="Center" Text="Średnia prędkość" FontSize="23" FontAttributes="Bold" Grid.Column="1" Grid.Row="1"/>
                         <Label HorizontalOptions="Center" Text="0.0 km/h" x:Name="averageSpeedLabel" FontSize="18" Grid.Column="1" Grid.Row="2"/>
 
+                        <!-- Distance -->
 
                         <Label HorizontalOptions="Center" Text="Dystans" FontSize="23" FontAttributes="Bold" Grid.Column="0" Grid.Row="3"/>
                         <Label HorizontalOptions="Center" Text="0.00 km" x:Name="distanceLabel" FontSize="18" Margin="0,0,0,20" Grid.Column="0" Grid.Row="4"/>
 
+                        <!-- Timer -->
 
                         <Label HorizontalOptions="Center" Text="Czas" FontSize="23" FontAttributes="Bold" Grid.Column="1" Grid.Row="3"/>
                         <Label HorizontalOptions="Center" Text="00:00:00" x:Name="timeLabel" FontSize="18" Grid.ColumnSpan="1" Grid.Column="1" Grid.Row="4" />
