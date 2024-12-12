@@ -59,7 +59,7 @@
                         <Label VerticalOptions="End" HorizontalOptions="Center" Text="Kalorie" FontSize="23" FontAttributes="Bold" Grid.Column="0" Grid.Row="1"/>
                         <Label HorizontalOptions="Center" Text="0.00 kcal" x:Name="caloriesLabel" FontSize="18" Grid.Column="0" Grid.Row="2"/>
 
-                        <!-- Avg speed -->
+                        <!-- Avg speed --> 
 
                         <Label HorizontalOptions="Center" Text="Średnia prędkość" FontSize="23" FontAttributes="Bold" Grid.Column="1" Grid.Row="1" Margin="35,0,0,0"/>
                         <Label HorizontalOptions="Center" Text="0.0 km/h" x:Name="averageSpeedLabel" FontSize="18" Grid.Column="1" Grid.Row="2"/>
