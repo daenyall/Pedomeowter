@@ -15,7 +15,7 @@
                 
                 />
         </Tab>
-
+  
         <Tab Icon="chart.png">
             <ShellContent
                 Title="Statystyki"
@@ -27,6 +27,20 @@
                 Title="Historia"
                 ContentTemplate="{DataTemplate local:Historia}"
                 Route="Historia"/>
+
+        </Tab>
+        <Tab Title="Galeria">
+            <ShellContent Title="Galeria"
+                        ContentTemplate="{DataTemplate local:Galeria}"
+                        Route="Galeria"
+              />
+
+
+            <ShellContent Title="Losowanie" ContentTemplate="{DataTemplate local:Losowanie}" Route="Losowanie"/>
+
+
+            <ShellContent Title="Kalendarz" ContentTemplate="{DataTemplate local:Kalendarz}" Route="Kalendarz"/>
+
 
         </Tab>
         <Tab Icon="award.png">

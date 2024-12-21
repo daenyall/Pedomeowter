@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KrokomierzSSDB.Losowanie"
+             Title="Losowanie">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" ColumnDefinitions="*, *, *">
+            <Label Text="szansa" x:Name="TestSzansa" Grid.Column="0" VerticalOptions="Start" HorizontalOptions="Start" TextColor="AliceBlue" />
+            <Label Text="rzadkosc" x:Name="TestRzadkosc" Grid.Column="2" VerticalOptions="Start" HorizontalOptions="End" TextColor="AliceBlue" />
+
+        </Grid>
+        <Label  Text="Liczby" x:Name="TestLiczby" Grid.Column="1" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" TextColor="AliceBlue"></Label>
+        <Grid Grid.Row="2" ColumnDefinitions="*, 3*, *">
+            <Button Text="1X" Grid.Column="0" VerticalOptions="End" HorizontalOptions="Center" Clicked="Button_1X_Clicked" />
+            <Button Text="10X" Grid.Column="2" VerticalOptions="End" HorizontalOptions="Center" />
+        </Grid>
+    </Grid>
+</ContentPage>
