@@ -21,6 +21,7 @@ namespace KrokomierzSSDB
         private const double StepLength = 0.78; // Length of each step in meters
         private const double CaloriesPerMeter = 0.05; // Calories per meter
         private int challengeSteps;
+        private int currency;
 
         private DateTime _lastStepTime = DateTime.MinValue;
         private DateTime _startTime = DateTime.MinValue;
@@ -48,6 +49,36 @@ namespace KrokomierzSSDB
                 challengeSteps = newChallengeSteps;
                 UpdateProgressBar();  // Update progress bar whenever challenge steps change
             });
+
+            
+            InitializeCurrencyAsync();
+            ShowDailyPopup();
+        }
+
+        private async Task InitializeCurrencyAsync()
+        {
+            currency = await _dbService.GetCurrency();
+        }
+
+
+
+        private async void ShowDailyPopup()
+        {
+            
+            var lastPopupDate = Preferences.Get("LastPopupDate", DateTime.MinValue);
+
+            
+            if (lastPopupDate.Date != DateTime.Today)
+            {
+                
+                await this.DisplayAlert("Hello!", "You can get Your daily dose of <currency>!  (100 <currency>)", "I get it!");
+
+                currency += 100;
+
+
+                
+                Preferences.Set("LastPopupDate", DateTime.Today);
+            }
         }
 
         private async Task LoadChallengeSteps()

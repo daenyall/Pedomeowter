@@ -17,8 +17,12 @@
                     <RowDefinition  Height="200"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
-
-                <Frame Grid.Column="1" BorderColor="Transparent" BackgroundColor="#391970F9" Margin="0,0,0,40">
+                 
+                <Label Text="0$" Grid.ColumnSpan="2" HorizontalOptions="End" FontSize="Large" Margin="0,-5,50,0" ZIndex="1"/>
+                <Button Text="+" Grid.ColumnSpan="2" CornerRadius="100" HorizontalOptions="End" FontSize="Large" Margin="0,-10,0,250"/>
+                    
+                    
+                <Frame Grid.Column="1" BorderColor="Transparent" BackgroundColor="#391970F9" Margin="0,40,0,40">
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition/>

@@ -107,7 +107,13 @@ namespace KrokomierzSSDB
 
             return totalSteps;
         }
-    
+
+        public async Task<int> GetCurrency()
+        {
+            var existingRecord = await _connection.Table<DaneDB>().FirstOrDefaultAsync();
+            return existingRecord?.Currency ?? 0;
+        }
+
 
 
     }
