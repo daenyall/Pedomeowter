@@ -4,7 +4,8 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using SQLite;
-using Android.Icu.Util;
+using KrokomierzSSDB.Resources.Databases;
+using KrokomierzSSDB.Resources.Pages;
 
 namespace KrokomierzSSDB
 {
@@ -202,6 +203,11 @@ namespace KrokomierzSSDB
         private void startToMeasure(object sender, EventArgs e)
         {
             StartStopwatch();
+        }
+
+        private async void openExchangePage(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new ExchangePage(_dbService));
         }
     }
 }

@@ -1,3 +1,5 @@
+using KrokomierzSSDB.Resources.Databases;
+
 namespace KrokomierzSSDB
 {
     public partial class Historia : ContentPage

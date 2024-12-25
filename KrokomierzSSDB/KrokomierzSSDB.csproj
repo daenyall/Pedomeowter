@@ -84,28 +84,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Galeria.xaml">
+	  <MauiXaml Update="Resources\Pages\ExchangePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Historia.xaml">
+	  <MauiXaml Update="Resources\Pages\Galeria.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Kalendarz.xaml">
+	  <MauiXaml Update="Resources\Pages\Historia.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Losowanie.xaml">
+	  <MauiXaml Update="Resources\Pages\Kalendarz.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Mapa.xaml">
+	  <MauiXaml Update="Resources\Pages\Losowanie.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Statystyki.xaml">
+	  <MauiXaml Update="Resources\Pages\Mapa.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Ustawienia.xaml">
+	  <MauiXaml Update="Resources\Pages\Statystyki.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Wyzwania.xaml">
+	  <MauiXaml Update="Resources\Pages\Ustawienia.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Pages\Wyzwania.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
