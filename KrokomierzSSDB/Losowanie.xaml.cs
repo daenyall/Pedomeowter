@@ -19,19 +19,18 @@ public partial class Losowanie : ContentPage
         Random rnd = new Random();
         int randomLegendarny = rnd.Next(1, gwarantowanyLegendarny + 1);
         int randomEpicki = rnd.Next(1, gwarantowanyEpicki + 1); 
-        TestLiczby.Text = "Ile do legendarnego" + gwarantowanyLegendarny.ToString() + " Ile do epickiego" + gwarantowanyEpicki.ToString();
         if (randomLegendarny == gwarantowanyLegendarny)
         {
-            TestRzadkosc.Text = "Legendarny" + randomLegendarny.ToString() + " "+  randomEpicki.ToString();
+            TestRzadkosc.Text = "Legendarny";
             gwarantowanyLegendarny = 80;
         }
         else if (randomLegendarny != gwarantowanyLegendarny && randomEpicki != gwarantowanyEpicki)
         {
-            TestRzadkosc.Text = "Zwyk³y" + randomLegendarny.ToString() + " "+ randomEpicki.ToString();
+            TestRzadkosc.Text = "Zwyk³y";
         }
         else if (randomLegendarny != gwarantowanyLegendarny && randomEpicki == gwarantowanyEpicki)
         {
-            TestRzadkosc.Text = "Epicki" + randomLegendarny.ToString() +" "+ randomEpicki.ToString();
+            TestRzadkosc.Text = "Epicki";
             gwarantowanyEpicki = 10;
         }
     }

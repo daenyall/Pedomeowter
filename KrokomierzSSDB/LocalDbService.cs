@@ -10,13 +10,14 @@ namespace KrokomierzSSDB
     {
         private const string DB_NAME = "demo_local_db.db3";
         private readonly SQLiteAsyncConnection _connection;
-        private const int DefaultStepGoal = 5000; // Domyślny cel kroków
+        private const int DefaultStepGoal = 5000; 
 
         public LocalDbService()
         {
             _connection = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, DB_NAME));
             _connection.CreateTableAsync<HistoriaDB>();
             _connection.CreateTableAsync<DaneDB>();
+            _connection.CreateTableAsync<Uzytkownik>();
         }
 
         public async Task<List<HistoriaDB>> GetHistorias()
@@ -107,8 +108,27 @@ namespace KrokomierzSSDB
 
             return totalSteps;
         }
-    
-
+        public async Task<Uzytkownik> GetUzytkownikById(int id)
+        {
+            return await _connection.Table<Uzytkownik>().Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
+   
+        public async Task<List<Uzytkownik>> GetUzytkownicy()
+        {
+            return await _connection.Table<Uzytkownik>().ToListAsync();
+        }
+        public async Task CreateUzytkownik(Uzytkownik uzytkownik)
+        {
+            await _connection.InsertAsync(uzytkownik);
+        }
+        public async Task UpdateUzytkownik(Uzytkownik uzytkownik)
+        {
+            await _connection.UpdateAsync(uzytkownik);
+        }
+        public async Task DeleteUzytkownik(Uzytkownik uzytkownik)
+        {
+            await _connection.DeleteAsync(uzytkownik);
+        }
 
     }
 }
