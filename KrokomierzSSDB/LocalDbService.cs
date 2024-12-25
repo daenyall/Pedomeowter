@@ -114,7 +114,28 @@ namespace KrokomierzSSDB
             return existingRecord?.Currency ?? 0;
         }
 
+        public async Task SetCurrencyAsync(int newCurrencyValue)
+        {
+            
+            var existingRecord = await _connection.Table<DaneDB>().FirstOrDefaultAsync();
 
+            if (existingRecord != null)
+            {
+                
+                existingRecord.Currency = newCurrencyValue;
+                await _connection.UpdateAsync(existingRecord);
+            }
+            else
+            {
+                
+                var newRecord = new DaneDB
+                {
+                    Currency = newCurrencyValue,
+                    Data = DateTime.Now.Date 
+                };
+                await _connection.InsertAsync(newRecord);
+            }
+        }
 
     }
 }

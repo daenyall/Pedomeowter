@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using SQLite;
+using Android.Icu.Util;
 
 namespace KrokomierzSSDB
 {
@@ -58,6 +59,7 @@ namespace KrokomierzSSDB
         private async Task InitializeCurrencyAsync()
         {
             currency = await _dbService.GetCurrency();
+            currencyLabel.Text = currency.ToString() + "$";
         }
 
 
@@ -71,7 +73,7 @@ namespace KrokomierzSSDB
             if (lastPopupDate.Date != DateTime.Today)
             {
                 
-                await this.DisplayAlert("Hello!", "You can get Your daily dose of <currency>!  (100 <currency>)", "I get it!");
+                await DisplayAlert("Hello!", "You can get Your daily dose of <currency>!  (100 <currency>)", "I get it!");
 
                 currency += 100;
 
