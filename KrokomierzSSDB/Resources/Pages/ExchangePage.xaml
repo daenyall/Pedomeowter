@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KrokomierzSSDB.Resources.Pages.ExchangePage"
+             BackgroundColor="#80000000">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Text="Exchange your Currency for pulls!" FontSize="Title" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Image Grid.Row="1"/>
+            <StackLayout Grid.Row="2">
+                <Label Text="Quantity of currency" HorizontalOptions="Center"/>
+                
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button Text="-" Clicked="minusButton"/>
+                    <Label x:Name="amountLabel" Text="0"/>
+                    <Button Text="+" Clicked="plusButton"/>
+                </StackLayout>
+
+                <Grid HorizontalOptions="Center" ColumnSpacing="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Text="-100" Grid.Column="0" Clicked="minusHundredButton"/>
+                    <Button Text="+100" Grid.Column="1" Clicked="plusHundredButton"/>
+                    <Button Text="Max" Grid.Column="2" Clicked="maxButton"/>
+                </Grid>
+
+                <Label x:Name="informationLabel" Text="Consume 0 of currency" HorizontalOptions="Center"/>
+                
+            </StackLayout>
+
+            
+            
+            <Grid Grid.Row="3" ColumnSpacing="160">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Text="Cancel" Grid.Column="0" Clicked="onCloseButtonClicked"/>
+                <Button Text="Exchange" Grid.Column="1" Clicked="onExchangeButtonClicked"/>
+            </Grid>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

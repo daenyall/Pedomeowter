@@ -2,6 +2,7 @@
 using Syncfusion.Maui.Core.Hosting;
 using SQLite;
 using CommunityToolkit.Maui;
+using KrokomierzSSDB.Resources.Databases;
 
 namespace KrokomierzSSDB;
 

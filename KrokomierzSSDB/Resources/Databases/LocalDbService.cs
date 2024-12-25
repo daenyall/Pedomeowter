@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace KrokomierzSSDB
+namespace KrokomierzSSDB.Resources.Databases
 {
     public class LocalDbService
     {
@@ -66,7 +66,7 @@ namespace KrokomierzSSDB
             }
         }
 
-   
+
 
         public async Task UpdateChallengeSteps(int przekazaneKroki)
         {
@@ -108,26 +108,63 @@ namespace KrokomierzSSDB
 
             return totalSteps;
         }
-        public async Task<Uzytkownik> GetUzytkownikById(int id)
+
+        public async Task<int> GetCurrency()
         {
-            return await _connection.Table<Uzytkownik>().Where(x => x.Id == id).FirstOrDefaultAsync();
+            var existingRecord = await _connection.Table<DaneDB>().FirstOrDefaultAsync();
+            return existingRecord?.Currency ?? 0;
         }
-   
-        public async Task<List<Uzytkownik>> GetUzytkownicy()
+
+        public async Task SetCurrencyAsync(int newCurrencyValue)
         {
-            return await _connection.Table<Uzytkownik>().ToListAsync();
+
+            var existingRecord = await _connection.Table<DaneDB>().FirstOrDefaultAsync();
+
+            if (existingRecord != null)
+            {
+
+                existingRecord.Currency = newCurrencyValue;
+                await _connection.UpdateAsync(existingRecord);
+            }
+            else
+            {
+
+                var newRecord = new DaneDB
+                {
+                    Currency = newCurrencyValue,
+                    Data = DateTime.Now.Date
+                };
+                await _connection.InsertAsync(newRecord);
+            }
         }
-        public async Task CreateUzytkownik(Uzytkownik uzytkownik)
+
+        public async Task<int> GetPulls()
         {
-            await _connection.InsertAsync(uzytkownik);
+            var existingRecord = await _connection.Table<DaneDB>().FirstOrDefaultAsync();
+            return existingRecord?.Pulls ?? 0;
         }
-        public async Task UpdateUzytkownik(Uzytkownik uzytkownik)
+
+        public async Task SetPullsAsync(int newPullsValue)
         {
-            await _connection.UpdateAsync(uzytkownik);
-        }
-        public async Task DeleteUzytkownik(Uzytkownik uzytkownik)
-        {
-            await _connection.DeleteAsync(uzytkownik);
+
+            var existingRecord = await _connection.Table<DaneDB>().FirstOrDefaultAsync();
+
+            if (existingRecord != null)
+            {
+
+                existingRecord.Pulls = newPullsValue;
+                await _connection.UpdateAsync(existingRecord);
+            }
+            else
+            {
+
+                var newRecord = new DaneDB
+                {
+                    Pulls = newPullsValue,
+                    Data = DateTime.Now.Date
+                };
+                await _connection.InsertAsync(newRecord);
+            }
         }
 
     }
